@@ -120,13 +120,15 @@ endfunction
 "Renders html locally and displays images
 function! Vim_Markdown_Preview_Local()
   let b:curr_file = expand('%:p')
+  let b:css_file = g:vim_markdown_preview_css
+  call system('cat ' . b:css_file . ' > /tmp/style.css')
 
   if g:vim_markdown_preview_github == 1
     call system('grip "' . b:curr_file . '" --export vim-markdown-preview.html --title vim-markdown-preview.html')
   elseif g:vim_markdown_preview_perl == 1
     call system('Markdown.pl "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
   elseif g:vim_markdown_preview_pandoc == 1
-    call system('pandoc --smart --standalone "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
+    call system('pandoc --smart -s "' . b:curr_file . '" -c style.css > /tmp/vim-markdown-preview.html')
   else
     call system('markdown "' . b:curr_file . '" > vim-markdown-preview.html')
   endif
@@ -166,7 +168,7 @@ function! Vim_Markdown_Preview_Local()
 
   if g:vim_markdown_preview_temp_file == 1
     sleep 200m
-    call system('rm vim-markdown-preview.html')
+    call system('rm /tmp/vim-markdown-preview.html /tmp/style.css')
   endif
 endfunction
 

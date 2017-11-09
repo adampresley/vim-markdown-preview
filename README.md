@@ -163,6 +163,10 @@ Example: Use Pandoc to render HTML.
 ```vim
 let vim_markdown_preview_pandoc=1
 ```
+A custom CSS stylesheet can be used with Pandoc. The default stylesheet for Pandoc is [Splendor](https://github.com/markdowncss/splendor).
+```vim
+let vim_markdown_preview_css="/path/to/css/file"
+```
 
 <a name='xdg'></a>
 ### The `vim_markdown_preview_use_xdg_open` option
