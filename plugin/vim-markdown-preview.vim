@@ -70,7 +70,7 @@ function! Vim_Markdown_Preview()
   if g:vim_markdown_preview_github == 1
     call system('grip "' . b:curr_file . '" --export /tmp/vim-markdown-preview.html --title vim-markdown-preview.html')
   elseif g:vim_markdown_preview_perl == 1
-    call system('Markdown.pl "' . b:curr_file . '" > /tmp/vim-markdown-preview.html')
+	 call system('echo "<style type=\"text/css\">$(cat '. g:vim_markdown_preview_css .')</style>\n$(Markdown.pl "'. b:curr_file .'")" > /tmp/vim-markdown-preview.html')
   elseif g:vim_markdown_preview_pandoc == 1
     call system('pandoc --smart -s "' . b:curr_file . '" -c style.css > /tmp/vim-markdown-preview.html')
   else
